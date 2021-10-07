@@ -27,6 +27,7 @@ class ComposerStaticInit4f79ae6a06103058122723f6ed45288d
         'MyApp\\Controllers\\PraktikantController' => __DIR__ . '/../..' . '/MyApp/Controllers/PraktikantController.php',
         'MyApp\\Models\\Model' => __DIR__ . '/../..' . '/MyApp/Models/Model.php',
         'MyApp\\Models\\Praktikant' => __DIR__ . '/../..' . '/MyApp/Models/Praktikant.php',
+        'MyApp\\Router\\Router' => __DIR__ . '/../..' . '/MyApp/Router/Router.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

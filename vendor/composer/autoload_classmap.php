@@ -12,4 +12,5 @@ return array(
     'MyApp\\Controllers\\PraktikantController' => $baseDir . '/MyApp/Controllers/PraktikantController.php',
     'MyApp\\Models\\Model' => $baseDir . '/MyApp/Models/Model.php',
     'MyApp\\Models\\Praktikant' => $baseDir . '/MyApp/Models/Praktikant.php',
+    'MyApp\\Router\\Router' => $baseDir . '/MyApp/Router/Router.php',
 );
