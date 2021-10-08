@@ -12,7 +12,7 @@ class Mentor extends Model{
     }
 
     public function Procitaj($id){
-        $sql="SELECT  m.Prezime AS PrezimeMentori,m.Ime AS ImeMentora,g.Naziv AS NazivGrupe  FROM ". $this->table."  m INNER JOIN grupe g ON m.idGrupe= g.ID WHERE m.ID=:id";   
+        $sql="SELECT  m.Prezime AS PrezimeMentora,m.Ime AS ImeMentora,g.Naziv AS NazivGrupe  FROM ". $this->table."  m INNER JOIN grupe g ON m.idGrupe= g.ID WHERE m.ID=:id";   
         try{
             $stmt=$this->connection->prepare($sql);
             $stmt->bindParam(":id",$id);
