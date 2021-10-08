@@ -25,7 +25,7 @@ class Grupa extends Model{
     public function Procitaj($id){
         $q="SELECT g.Naziv AS NazivGrupe, m.Ime AS ImeMentora, m.Prezime AS PrezimeMentora,p.Ime AS ImePraktikanta,p.Prezime AS PrezimePraktikanta FROM ". $this->table."  g LEFT JOIN mentori m ON g.ID=m.idGrupe LEFT JOIN praktikanti p ON g.ID=p.idGrupe WHERE g.ID=:id";   
         try{
-            $stmt=$this->conn->prepare($q);
+            $stmt=$this->connection->prepare($q);
             $stmt->bindParam(":id",$id);
             $stmt->execute();
             return $stmt;
@@ -59,14 +59,15 @@ class Grupa extends Model{
     }
     public function listingGrupe(){
         $total = $this->connection->query("SELECT COUNT(*) FROM ".$this->table."  g LEFT JOIN mentori m ON g.ID=m.idGrupe LEFT JOIN praktikanti p ON g.ID=p.idGrupe")->fetchColumn();
-        $limit = 30;
-        $pages = ceil($total / $limit);
+        var_dump($total);
+        $limit = 2;
+        //$pages = ceil($total / $limit);
        
-        $page =(int)  min($pages, filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT, array('default'   => 1)));
+        $page = (isset($_GET['page']) && $_GET['page'] > 0) ? intval($_GET['page']) : 1;
       
         $offset = abs($page - 1)  * $limit;
-    //   var_dump($offset);
-        $sql="SELECT g.Naziv AS NazivGrupe, m.Ime AS ImeMentora, m.Prezime AS PrezimeMentora,p.Ime AS ImePraktikanta,p.Prezime AS PrezimePraktikanta FROM ". $this->table."  g LEFT JOIN mentori m ON g.ID=m.idGrupe LEFT JOIN praktikanti p ON g.ID=p.idGrupe ORDER BY g.Naziv LIMIT :limit  OFFSET :offset";
+
+        $sql="SELECT g.Naziv AS NazivGrupe, m.Ime AS ImeMentora, m.Prezime AS PrezimeMentora,p.Ime AS ImePraktikanta,p.Prezime AS PrezimePraktikanta FROM ". $this->table."  g INNER JOIN mentori m ON g.ID=m.idGrupe INNER JOIN praktikanti p ON g.ID=p.idGrupe ORDER BY g.Naziv LIMIT :limit  OFFSET :offset";
        
         try{
             $stmt=$this->connection->prepare($sql);

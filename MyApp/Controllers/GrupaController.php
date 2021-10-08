@@ -60,17 +60,27 @@ class GrupaController extends Controller{
     }
     public function show($grupaID){
         $result = $this->zaposleni->Procitaj($grupaID);
-        if (! $result) {
-           return $this->notFoundResponse();
-       }
-        $row= $result->fetch(PDO::FETCH_ASSOC);
-        $in=[
-            "id"=>$row["ID"],
-            "Naziv"=>$row["Naziv"]
-       ];
-       echo $response['body'] = json_encode($in);
-       $response['status_code_header'] = 'HTTP/1.1 200 OK';
-       return $response;
+        $n=$result->rowCount();
+        // var_dump($n);
+        if($n>0){
+            $inArr=[];
+            while($row= $result->fetch(PDO::FETCH_ASSOC)){
+            
+                extract($row);
+
+                $in=[
+                    "NazivGrupe"=>$row["NazivGrupe"],
+                    "ImeMentora"=>$row["ImeMentora"],
+                    "PrezimeMentora"=>$row["PrezimeMentora"],
+                    "ImePraktikanta"=>$row["ImePraktikanta"],
+                    "PrezimePraktikanta"=>$row["PrezimePraktikanta"]
+                ];
+                array_push($inArr,$in);
+            }
+        echo $response['body'] = json_encode($inArr);
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        return $response;
+         }
    }
   
     protected function validate($input){
