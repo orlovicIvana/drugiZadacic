@@ -58,16 +58,17 @@ class Grupa extends Model{
         }
     }
     public function listingGrupe(){
-        $total = $this->connection->query("SELECT COUNT(*) FROM ".$this->table."  g LEFT JOIN mentori m ON g.ID=m.idGrupe LEFT JOIN praktikanti p ON g.ID=p.idGrupe")->fetchColumn();
-        var_dump($total);
+        //$total = $this->connection->query("SELECT COUNT(*) FROM ".$this->table."  g INNER JOIN mentori m ON g.ID=m.idGrupe INNER JOIN praktikanti p ON g.ID=p.idGrupe")->fetchColumn();
+        //var_dump($total);
         $limit = 2;
         //$pages = ceil($total / $limit);
        
         $page = (isset($_GET['page']) && $_GET['page'] > 0) ? intval($_GET['page']) : 1;
+        $sort = isset($_GET['order']) && strtolower($_GET['order']) == 'desc' ? 'DESC' : 'ASC';
       
         $offset = abs($page - 1)  * $limit;
 
-        $sql="SELECT g.Naziv AS NazivGrupe, m.Ime AS ImeMentora, m.Prezime AS PrezimeMentora,p.Ime AS ImePraktikanta,p.Prezime AS PrezimePraktikanta FROM ". $this->table."  g INNER JOIN mentori m ON g.ID=m.idGrupe INNER JOIN praktikanti p ON g.ID=p.idGrupe ORDER BY g.Naziv LIMIT :limit  OFFSET :offset";
+        $sql="SELECT g.Naziv AS NazivGrupe, m.Ime AS ImeMentora, m.Prezime AS PrezimeMentora,p.Ime AS ImePraktikanta,p.Prezime AS PrezimePraktikanta FROM ". $this->table."  g INNER JOIN mentori m ON g.ID=m.idGrupe INNER JOIN praktikanti p ON g.ID=p.idGrupe ORDER BY  g.Naziv ".$sort." LIMIT :limit  OFFSET :offset";
        
         try{
             $stmt=$this->connection->prepare($sql);

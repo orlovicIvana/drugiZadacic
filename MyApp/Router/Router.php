@@ -35,7 +35,7 @@ class Router{
         $requestMethod =strtoupper ($_SERVER["REQUEST_METHOD"]);
         $uri=$_SERVER['REQUEST_URI'];
         $personId= isset($_GET["id"]) ? (int)$_GET["id"]:null;
-        if($personId !== null || isset($_GET["page"]) || isset($_GET["sort_by"])){
+        if($personId !== null || isset($_GET["page"]) || isset($_GET["order"])){
             $uri = explode("?",$uri);
             $uri=$uri[count($uri) - 2];   
         }           
