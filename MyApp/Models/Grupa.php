@@ -76,7 +76,7 @@ class Grupa extends Model{
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
            
             $stmt->execute();
-            var_dump($offset);
+          
             return $stmt;
         }catch(PDOException $e){
             exit($e->getMessage());

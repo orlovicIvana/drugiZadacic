@@ -30,7 +30,7 @@ class Controller{
                 array_push($Arr,$data);
             }
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
-        echo $response['body'] = json_encode($Arr);
+        
         return $response;
             }
     }
@@ -51,7 +51,7 @@ class Controller{
             "NazivGrupe"=>$row["NazivGrupe"]
         ];
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
-        echo $response['body'] = json_encode($data);
+  
         return $response;
     }
 

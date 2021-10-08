@@ -30,7 +30,7 @@
                "ImePraktikanta"=>$row["ImePraktikanta"]
            ];
            $response['status_code_header'] = 'HTTP/1.1 201 Created';
-           echo $response['body'] = json_encode($in);
+           
            return $response;
        }
     }

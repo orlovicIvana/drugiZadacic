@@ -34,7 +34,7 @@ class GrupaController extends Controller{
                 ];
                 array_push($inArr,$in);
             }
-        echo $response['body'] = json_encode($inArr);
+       
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         return $response;
          }
@@ -53,7 +53,7 @@ class GrupaController extends Controller{
                 ];
                 array_push($inArr,$in);
             }
-        echo $response['body'] = json_encode($inArr);
+   
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         return $response;
          }
@@ -77,7 +77,7 @@ class GrupaController extends Controller{
                 ];
                 array_push($inArr,$in);
             }
-        echo $response['body'] = json_encode($inArr);
+     
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         return $response;
          }
